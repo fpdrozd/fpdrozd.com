@@ -1,38 +1,61 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
+  <v-app dark class="white--text" id="app" v-scroll="onScroll">
+    <Navbar :scrolled="scrolled" />
     <v-content>
-      <HelloWorld/>
+      <CoverVideo />
+      <Cover />
+
+      <AboutMe id="AboutMe"/>
+      <MySkills id="MySkills" />
+      <MyProjects id="MyProjects" />
+      <Contact id="Contact" />
     </v-content>
+    <v-footer class="justify-center py-4">
+      <span class="grey--text">&copy;2019 - {{ $vuetify.t('$vuetify.footer.copyright') }}</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Navbar from '@/components/Navbar';
+import CoverVideo from '@/components/CoverVideo';
+import Cover from '@/components/Cover';
+import AboutMe from '@/components/AboutMe';
+import MySkills from '@/components/MySkills';
+import MyProjects from '@/components/MyProjects';
+import Contact from '@/components/Contact';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar,
+    CoverVideo,
+    Cover,
+    AboutMe,
+    MySkills,
+    MyProjects,
+    Contact
   },
   data () {
     return {
-      //
+      scrolled: false
+    }
+  },
+  methods: {
+    onScroll() {
+      this.scrolled = !!window.scrollY;
     }
   }
 }
 </script>
+
+<style>
+  #app {
+    font-size: 16px;
+  }
+
+  ::selection {
+    background: #999999;
+    color: white;
+  }
+</style>
