@@ -13,8 +13,11 @@
                 <v-text-field required :label="$vuetify.t('$vuetify.contact.email')" v-model="email" prepend-icon="fa-envelope" :rules="emailRules"></v-text-field>
                 <v-textarea required :counter="500" :label="$vuetify.t('$vuetify.contact.message')" v-model="message" prepend-icon="fa-align-left" :rules="messageRules"></v-textarea>
                 <v-alert type="error" :value="error" class="mt-5" outline>{{ $vuetify.t('$vuetify.contact.errorMessage') }}</v-alert>
+
                 <v-layout row justify-center pt-4>
-                  <v-btn flat class="send" :loading="loading" @click="submit">{{ $vuetify.t('$vuetify.contact.send') }}</v-btn>
+                  <vue-recaptcha ref="recaptcha" @verify="submit" @expired="resetRecaptcha" :sitekey="sitekey">
+                    <v-btn flat class="send" :loading="loading">{{ $vuetify.t('$vuetify.contact.send') }}</v-btn>
+                  </vue-recaptcha>
                 </v-layout>
               </v-form>
             </v-card-text>
@@ -26,16 +29,22 @@
 </template>
 
 <script>
+import VueRecaptcha from 'vue-recaptcha';
+
 export default {
+  components: {
+    'vue-recaptcha': VueRecaptcha
+  },
   data() {
     return {
       name: '',
       email: '',
       message: '',
+      sitekey: process.env.VUE_APP_RECAPTCHA_KEY,
       nameRules: [
         v => !!v || this.$vuetify.t('$vuetify.contact.validation.name.isRequired'),
-        v => v.length >= 3 || this.$vuetify.t('$vuetify.contact.validation.name.isTooShort'),
-        v => v.length <= 30 || this.$vuetify.t('$vuetify.contact.validation.name.isTooLong')
+        v => (v && v.length >= 3) || this.$vuetify.t('$vuetify.contact.validation.name.isTooShort'),
+        v => (v && v.length <= 30) || this.$vuetify.t('$vuetify.contact.validation.name.isTooLong')
       ],
       emailRules: [
         v => !!v || this.$vuetify.t('$vuetify.contact.validation.email.isRequired'),
@@ -43,19 +52,27 @@ export default {
       ],
       messageRules: [
         v => !!v || this.$vuetify.t('$vuetify.contact.validation.message.isRequired'),
-        v => v.length <= 500 || this.$vuetify.t('$vuetify.contact.validation.message.isTooLong')
+        v => (v && v.length <= 500) || this.$vuetify.t('$vuetify.contact.validation.message.isTooLong')
       ],
       loading: false,
       error: false
     };
   },
   methods: {
-    submit() {
+    resetRecaptcha() { this.$refs.recaptcha.reset(); },
+    submit(recaptcha) {
       const submit = () => {
         this.loading = true;
 
         const handleFailure = (res) => { if (!res.data.success) throw Error(); };
-        const success = () => this.$refs.form.reset();
+        const success = () => {
+          this.error = false;
+          this.$refs.form.reset();
+        };
+        const reset = () => {
+          this.loading = false;
+          this.resetRecaptcha();
+        };
 
         this.axios({
           method: 'post',
@@ -63,15 +80,15 @@ export default {
           data: {
             name: this.name,
             email: this.email,
-            message: this.message
+            message: this.message,
+            recaptcha: recaptcha
           },
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }).then(handleFailure).then(success)
-        .catch(error => this.error = true)
-        .then(() => this.loading = false);
-    };
+        .catch(() => this.error = true).then(reset);
+      };
 
       const valid = this.$refs.form.validate();
       if (valid) submit();
