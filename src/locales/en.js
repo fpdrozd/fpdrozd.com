@@ -11,11 +11,12 @@ export default {
     myGithub: 'My Github'
   },
   mySkills: {
-    description: 'Here is the list of technologies that i work with:'
+    description: 'Here is the list of technologies and tools that i work with:'
   },
   myProjects: {
     description: 'Check out my portfolio:',
     projectDescriptions: {
+      Plant: 'Application that allows you to conveniently plan your time.',
       SocketChat: 'Socket.io based chat application written in Vanilla.js.',
       Perceptron: 'An example of a machine learning perceptron.'
     },

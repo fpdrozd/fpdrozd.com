@@ -16,7 +16,7 @@
                 <v-icon left small>fa-eye</v-icon>
                 <span>{{ $vuetify.t('$vuetify.myProjects.view') }}</span>
               </v-btn>
-              <v-btn flat class="project_repository grey darken-3" :href="project.repository" target="_blank">
+              <v-btn flat v-if="project.repository" class="project_repository grey darken-3" :href="project.repository" target="_blank">
                 <v-icon left small>fa-code-branch</v-icon>
                 <span>{{ $vuetify.t('$vuetify.myProjects.repository') }}</span>
               </v-btn>
@@ -33,6 +33,12 @@ export default {
   computed: {
     projects() {
       return [
+        {
+          title: 'Plant',
+          thumbnail: require('@/assets/myprojects/Plant.png'),
+          description: this.$vuetify.t('$vuetify.myProjects.projectDescriptions.Plant'),
+          link: 'https://plantapp.pl'
+        },
         {
           title: 'Socket Chat',
           thumbnail: require('@/assets/myprojects/SocketChat.png'),

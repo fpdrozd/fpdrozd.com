@@ -51,7 +51,10 @@ export default {
         { id: 2, techs: [{ icon: require('@/assets/myskills/css3.png'), title: 'CSS 3' }], sub: false },
         { id: 3, techs: [{ icon: require('@/assets/myskills/rwd.png'), title: 'Responsive Web Design' }], sub: false },
         { id: 4, techs: [{ icon: require('@/assets/myskills/js.png'), title: 'JavaScript (ES6)' }], sub: false },
-        { id: 5, techs: [{ icon: require('@/assets/myskills/vue.png'), title: 'Vue.js' }], sub: true },
+        { id: 5, techs: [
+          { icon: require('@/assets/myskills/vue.png'), title: 'Vue.js' },
+          { icon: require('@/assets/myskills/vuetify.png'), title: 'Vuetify' }
+        ], sub: true },
         { id: 6, techs: [{ icon: require('@/assets/myskills/jquery.png'), title: 'jQuery' }], sub: true },
         { id: 7, techs: [{ icon: require('@/assets/myskills/ajax.png'), title: 'AJAX' }], sub: true },
         { id: 8, techs: [{ icon: require('@/assets/myskills/babel.png'), title: 'Babel' }], sub: true },
@@ -78,24 +81,20 @@ export default {
           { icon: require('@/assets/myskills/apache.png'), title: 'Apache'},
           { icon: require('@/assets/myskills/nginx.png'), title: 'Nginx' }
         ], sub: false },
-        { id: 3, techs: [{ icon: require('@/assets/myskills/nodejs.png'), title: 'Node.js' }], sub: false },
-        { id: 4, techs: [{ icon: require('@/assets/myskills/expressjs.png'), title: 'Express.js' }], sub: true },
-        { id: 5, techs: [{ icon: require('@/assets/myskills/socketio.png'), title: 'Socket.io' }], sub: true },
-        { id: 6, techs: [{ icon: require('@/assets/myskills/mongoose.png'), title: 'Mongoose' }], sub: true },
-        { id: 7, techs: [
-          { icon: require('@/assets/myskills/mocha.png'), title: 'Mocha' },
-          { icon: require('@/assets/myskills/jest.png'), title: 'Jest' }
-        ], sub: true },
-        { id: 8, techs: [
-          { icon: require('@/assets/myskills/yarn.png'), title: 'Yarn' },
-          { icon: require('@/assets/myskills/npm.png'), title: 'Npm' }
-        ], sub: true },
-        { id: 9, techs: [{ icon: require('@/assets/myskills/php.png'), title: 'PHP' }], sub: false },
-        { id: 10, techs: [
+        { id: 3, techs: [{ icon: require('@/assets/myskills/docker.png'), title: 'Docker' }], sub: false },
+        { id: 4, techs: [{ icon: require('@/assets/myskills/firebase.png'), title: 'Firebase' }], sub: false },
+        { id: 5, techs: [{ icon: require('@/assets/myskills/nodejs.png'), title: 'Node.js' }], sub: false },
+        { id: 6, techs: [{ icon: require('@/assets/myskills/expressjs.png'), title: 'Express.js' }], sub: true },
+        { id: 7, techs: [{ icon: require('@/assets/myskills/socketio.png'), title: 'Socket.io' }], sub: true },
+        { id: 8, techs: [{ icon: require('@/assets/myskills/mongoose.png'), title: 'Mongoose' }], sub: true },
+        { id: 9, techs: [{ icon: require('@/assets/myskills/python.png'), title: 'Python' }], sub: false },
+        { id: 10, techs: [{ icon: require('@/assets/myskills/tensorflow.png'), title: 'Tensorflow' }], sub: true },
+        { id: 11, techs: [{ icon: require('@/assets/myskills/php.png'), title: 'PHP' }], sub: false },
+        { id: 12, techs: [
           { icon: require('@/assets/myskills/mongodb.png'), title: 'MongoDB' },
           { icon: require('@/assets/myskills/mariadb.png'), title: 'MariaDB' }
         ], sub: false },
-        { id: 11, techs: [{ icon: require('@/assets/myskills/git.png'), title: 'Git' }], sub: false }
+        { id: 13, techs: [{ icon: require('@/assets/myskills/git.png'), title: 'Git' }], sub: false }
       ]
     };
   }

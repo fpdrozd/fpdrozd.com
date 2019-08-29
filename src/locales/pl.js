@@ -11,11 +11,12 @@ export default {
     myGithub: 'Mój Github'
   },
   mySkills: {
-    description: 'Lista technologii z którymi pracuję:'
+    description: 'Lista technologii i narzędzi z którymi pracuję:'
   },
   myProjects: {
     description: 'Zobacz moje portfolio:',
     projectDescriptions: {
+      Plant: 'Aplikacja, dzięki której w wygodny sposób zaplanujesz swój czas.',
       SocketChat: 'Aplikacja czatu oparta na Socket.io, napisana w Vanilla.js.',
       Perceptron: 'Przykład perceptronu uczenia maszynowego.'
     },
