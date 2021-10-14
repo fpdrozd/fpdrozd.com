@@ -7,13 +7,6 @@ const contentfulConfig = {
     process.env.CONTENTFUL_DELIVERY_TOKEN,
 };
 
-const { spaceId, accessToken } = contentfulConfig;
-if (!spaceId || !accessToken) {
-  throw new Error(
-    "Contentful spaceId and the access token need to be provided."
-  );
-}
-
 module.exports = {
   siteMetadata: {
     title: "fpdrozd.com",
@@ -26,16 +19,22 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-root-import",
-    "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-sass",
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: "gatsby-plugin-google-gtag",
       options: {
-        name: "images",
-        path: "./src/images/",
+        trackingIds: [process.env.TRACKING_ID],
       },
-      __key: "images",
     },
+    {
+      resolve: "gatsby-plugin-purgecss",
+      options: {
+        printRejected: true,
+        purgeOnly : ['bootstrap/'],
+      },
+    },
+    // "gatsby-plugin-webpack-bundle-analyser-v2"
   ],
 };
